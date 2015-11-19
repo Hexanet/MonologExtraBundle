@@ -1,0 +1,41 @@
+{
+    "name": "hexanet/monolog-extra-bundle",
+    "type": "symfony-bundle",
+    "description": "stuff related to log",
+    "keywords": ["log", "logging"],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Hexanet\\Common\\MonologExtraBundle\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Floran Brutel",
+            "email": "f.brutel@hexanet.fr"
+        }
+    ],
+    "require": {
+        "graylog2/gelf-php": "~1.0",
+        "symfony/security": "~2.6|~3.0",
+        "symfony/config": "~2.3|~3.0",
+        "symfony/http-foundation": "~2.3|~3.0",
+        "symfony/dependency-injection": "~2.3|~3.0",
+        "symfony/http-kernel": "~2.3|~3.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.0",
+        "liip/rmt": "~1.1.0"
+    },
+    "suggest": {
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
+
