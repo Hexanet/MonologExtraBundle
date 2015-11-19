@@ -6,55 +6,55 @@ services:
             - %hexanet_monolog_extra.gelf.port%
 
     hexanet_monolog_extra.gelf.publisher:
-        class: Hexanet\Common\LogBundle\Gelf\Publisher
+        class: Hexanet\Common\MonologExtraBundle\Gelf\Publisher
         arguments:
             - @hexanet_monolog_extra.gelf.transport
 
     hexanet_monolog_extra.listener.console_exception:
-        class: Hexanet\Common\LogBundle\EventListener\ConsoleExceptionListener
+        class: Hexanet\Common\MonologExtraBundle\EventListener\ConsoleExceptionListener
         arguments:
             - @logger
 
     hexanet_monolog_extra.listener.request_response:
-        class: Hexanet\Common\LogBundle\EventListener\RequestResponseListener
+        class: Hexanet\Common\MonologExtraBundle\EventListener\RequestResponseListener
         arguments:
             - @hexanet_monolog_extra.logger.request
             - @hexanet_monolog_extra.logger.response
 
     hexanet_monolog_extra.listener.uid_to_response:
-        class: Hexanet\Common\LogBundle\EventListener\UidResponseListener
+        class: Hexanet\Common\MonologExtraBundle\EventListener\UidResponseListener
         arguments:
             - @hexanet_monolog_extra.logger.provider.uid
 
     hexanet_monolog_extra.logger.provider.uid.uniq:
-        class: Hexanet\Common\LogBundle\Provider\Uid\UniqidProvider
+        class: Hexanet\Common\MonologExtraBundle\Provider\Uid\UniqidProvider
 
     hexanet_monolog_extra.logger.provider.uid.apache_unique_id:
-        class: Hexanet\Common\LogBundle\Provider\Uid\ApacheUniqueIdProvider
+        class: Hexanet\Common\MonologExtraBundle\Provider\Uid\ApacheUniqueIdProvider
 
     hexanet_monolog_extra.logger.provider.session.symfony:
-        class: Hexanet\Common\LogBundle\Provider\Session\SymfonySessionIdProvider
+        class: Hexanet\Common\MonologExtraBundle\Provider\Session\SymfonySessionIdProvider
         arguments:
           - %hexanet_monolog_extra.session_start%
           - @?session
 
     hexanet_monolog_extra.logger.provider.user.symfony:
-        class: Hexanet\Common\LogBundle\Provider\User\SymfonyUserProvider
+        class: Hexanet\Common\MonologExtraBundle\Provider\User\SymfonyUserProvider
         arguments:
             - @security.token_storage
 
     hexanet_monolog_extra.logger.processor.username:
-        class: Hexanet\Common\LogBundle\Processor\UserProcessor
+        class: Hexanet\Common\MonologExtraBundle\Processor\UserProcessor
         arguments:
             - @hexanet_monolog_extra.logger.provider.user
 
     hexanet_monolog_extra.logger.processor.session_id:
-        class: Hexanet\Common\LogBundle\Processor\SessionIdProcessor
+        class: Hexanet\Common\MonologExtraBundle\Processor\SessionIdProcessor
         arguments:
             - @hexanet_monolog_extra.logger.provider.session
 
     hexanet_monolog_extra.logger.processor.additions:
-        class: Hexanet\Common\LogBundle\Processor\AdditionsProcessor
+        class: Hexanet\Common\MonologExtraBundle\Processor\AdditionsProcessor
         arguments:
             - []
 
@@ -65,16 +65,16 @@ services:
         class: Monolog\Processor\ProcessIdProcessor
 
     hexanet_monolog_extra.logger.processor.uid:
-        class: Hexanet\Common\LogBundle\Processor\UidProcessor
+        class: Hexanet\Common\MonologExtraBundle\Processor\UidProcessor
         arguments:
             - @hexanet_monolog_extra.logger.provider.uid
 
     hexanet_monolog_extra.logger.request:
-        class: Hexanet\Common\LogBundle\Logger\Request\RequestLogger
+        class: Hexanet\Common\MonologExtraBundle\Logger\Request\RequestLogger
         arguments:
             - @logger
 
     hexanet_monolog_extra.logger.response:
-        class: Hexanet\Common\LogBundle\Logger\Response\ResponseLogger
+        class: Hexanet\Common\MonologExtraBundle\Logger\Response\ResponseLogger
         arguments:
             - @logger
