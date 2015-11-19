@@ -1,6 +1,6 @@
 # MonologExtraBundle
 
-[![Build Status](https://secure.travis-ci.org/hexanet/MonologExtraBundle.png)](http://travis-ci.org/hexanet/MonologExtraBundle)
+[![Build Status](https://api.travis-ci.org/Hexanet/MonologExtraBundle.svg)](http://travis-ci.org/Hexanet/MonologExtraBundle)
 
 ```
 hexanet_monolog_extra:

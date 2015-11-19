@@ -5,9 +5,10 @@
     "keywords": ["log", "logging"],
     "license": "MIT",
     "autoload": {
-        "psr-4": {
-            "Hexanet\\Common\\MonologExtraBundle\\": "src"
-        }
+        "psr-4": { "Hexanet\\Common\\MonologExtraBundle\\": "src" }
+    },
+    "autoload-dev": {
+        "psr-4" : { "spec\\Hexanet\\Common\\MonologExtraBundle\\" : "spec" }
     },
     "authors": [
         {
