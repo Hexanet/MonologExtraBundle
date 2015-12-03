@@ -5,10 +5,9 @@
     "keywords": ["log", "logging"],
     "license": "MIT",
     "autoload": {
-        "psr-4": { "Hexanet\\Common\\MonologExtraBundle\\": "src" }
-    },
-    "autoload-dev": {
-        "psr-4" : { "spec\\Hexanet\\Common\\MonologExtraBundle\\" : "spec" }
+        "psr-4": {
+          "Hexanet\\Common\\MonologExtraBundle\\": "src"
+        }
     },
     "authors": [
         {
@@ -25,8 +24,7 @@
         "symfony/http-kernel": "~2.3|~3.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.0",
-        "liip/rmt": "~1.1.0"
+        "phpspec/phpspec": "~2.0"
     },
     "suggest": {
     },
@@ -39,4 +37,3 @@
         }
     }
 }
-
