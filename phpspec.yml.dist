@@ -1,0 +1,4 @@
+suites:
+  default:
+    namespace: Hexanet\Common\MonologExtraBundle
+    psr4_prefix: Hexanet\Common\MonologExtraBundle
