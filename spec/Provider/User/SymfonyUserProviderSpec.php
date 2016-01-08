@@ -4,15 +4,13 @@ namespace spec\Hexanet\Common\MonologExtraBundle\Provider\User;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\User\User;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class SymfonyUserProviderSpec extends ObjectBehavior
 {
-    function let(TokenStorageInterface $tokenStorage)
+    function let(ContainerInterface $container)
     {
-        $this->beConstructedWith($tokenStorage, false);
+        $this->beConstructedWith($container);
     }
 
     function it_is_initializable()
@@ -25,20 +23,8 @@ class SymfonyUserProviderSpec extends ObjectBehavior
         $this->shouldImplement('Hexanet\Common\MonologExtraBundle\Provider\User\UserProviderInterface');
     }
 
-    function it_returns_logged_user($tokenStorage, TokenInterface $token)
+    function it_returns_user()
     {
-        $user = new User('username', 'password');
-
-        $tokenStorage->getToken()->willReturn($token);
-        $token->getUser()->willReturn($user);
-
-        $this->getUser()->shouldReturn('username');
-    }
-
-    function it_returns_cli_user($tokenStorage)
-    {
-        $this->beConstructedWith($tokenStorage, true);
-
-        $this->getUser()->shouldReturn('cli');
+        $this->getUser()->shouldBeString();
     }
 }
