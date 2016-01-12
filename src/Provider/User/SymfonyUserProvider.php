@@ -3,7 +3,7 @@
 namespace Hexanet\Common\MonologExtraBundle\Provider\User;
 
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class SymfonyUserProvider implements UserProviderInterface
 {
@@ -18,16 +18,16 @@ class SymfonyUserProvider implements UserProviderInterface
     CONST USER_CLI = 'cli';
 
     /**
-     * @var TokenStorageInterface
+     * @var ContainerInterface
      */
-    protected $tokenStorage;
+    protected $container;
 
     /**
-     * @param TokenStorageInterface $tokenStorage
+     * @param ContainerInterface $container
      */
-    public function __construct(TokenStorageInterface $tokenStorage)
+    public function __construct(ContainerInterface $container)
     {
-        $this->tokenStorage = $tokenStorage;
+        $this->container = $container;
     }
 
     /**
@@ -35,14 +35,15 @@ class SymfonyUserProvider implements UserProviderInterface
      */
     public function getUser()
     {
+        $securityContext = $this->container->get('security.context');
+
         $user = self::USER_ANONYMOUS;
+        if ($securityContext && $securityContext->getToken() !== null && $securityContext->getToken()->getUser() instanceof UserInterface) {
+            $user = $securityContext->getToken()->getUser()->getUsername();
+        }
 
         if (php_sapi_name() == "cli") {
             $user = self::USER_CLI;
-        }
-
-        if ($this->tokenStorage->getToken() !== null && $this->tokenStorage->getToken()->getUser() instanceof UserInterface) {
-            $user = $this->tokenStorage->getToken()->getUser()->getUsername();
         }
 
         return $user;
