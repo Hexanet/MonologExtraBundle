@@ -10,7 +10,7 @@ use Hexanet\Common\MonologExtraBundle\Provider\User\UserProviderInterface;
 class UserProcessor
 {
     /**
-     * @var \Hexanet\Common\LogBundle\Provider\User\UserProviderInterface
+     * @var UserProviderInterface
      */
     protected $userProvider;
 

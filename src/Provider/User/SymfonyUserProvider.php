@@ -2,8 +2,10 @@
 
 namespace Hexanet\Common\MonologExtraBundle\Provider\User;
 
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class SymfonyUserProvider implements UserProviderInterface
 {
@@ -17,17 +19,25 @@ class SymfonyUserProvider implements UserProviderInterface
      */
     CONST USER_CLI = 'cli';
 
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
+    private $tokenStorage;
 
     /**
-     * @param ContainerInterface $container
+     * @param ContainerInterface|TokenStorageInterface|null $tokenStorage
      */
-    public function __construct(ContainerInterface $container)
+    public function __construct($tokenStorage = null)
     {
-        $this->container = $container;
+        // BC layer for Symfony 2.5 and older
+        if ($tokenStorage instanceof ContainerInterface) {
+            $this->tokenStorage = $tokenStorage;
+
+            return;
+        }
+
+        if (null !== $tokenStorage && !$tokenStorage instanceof TokenStorageInterface) {
+            throw new \InvalidArgumentException(sprintf('The first argument of the %s constructor should be a Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface or a Symfony\Component\DependencyInjection\ContainerInterface or null.', __CLASS__));
+        }
+
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -35,11 +45,14 @@ class SymfonyUserProvider implements UserProviderInterface
      */
     public function getUser()
     {
-        $securityContext = $this->container->get('security.context');
-
         $user = self::USER_ANONYMOUS;
-        if ($securityContext && $securityContext->getToken() !== null && $securityContext->getToken()->getUser() instanceof UserInterface) {
-            $user = $securityContext->getToken()->getUser()->getUsername();
+
+        $tokenStorage = $this->getTokenStorage();
+        if (null !== $tokenStorage) {
+            $token = $tokenStorage->getToken();
+            if (null !== $token && $token->getUser() instanceof UserInterface) {
+                $user = $token->getUser()->getUsername();
+            }
         }
 
         if (php_sapi_name() == "cli") {
@@ -47,5 +60,18 @@ class SymfonyUserProvider implements UserProviderInterface
         }
 
         return $user;
+    }
+
+    /**
+     * @return SecurityContextInterface|TokenStorageInterface
+     */
+    public function getTokenStorage()
+    {
+        // BC layer for Symfony 2.5 and older
+        if ($this->tokenStorage instanceof ContainerInterface) {
+            return $this->tokenStorage->get('security.context');
+        }
+
+        return $this->tokenStorage;
     }
 }
