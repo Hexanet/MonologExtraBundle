@@ -13,7 +13,7 @@ class SecurityContextPass implements CompilerPassInterface
         if ($container->has('security.token_storage')) {
             $argument = new Reference('security.token_storage');
         } elseif ($container->has('security.context')) {
-            $argument = new Reference('security.context');
+            $argument = new Reference('service_container');
         } else {
             return; // SecurityBundle is not configured
         }
