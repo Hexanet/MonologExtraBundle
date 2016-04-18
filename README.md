@@ -1,6 +1,16 @@
 # MonologExtraBundle
 
-[![Build Status](https://api.travis-ci.org/Hexanet/MonologExtraBundle.svg)](http://travis-ci.org/Hexanet/MonologExtraBundle)
+[![Build Status](https://api.travis-ci.org/Hexanet/MonologExtraBundle.svg)](http://travis-ci.org/Hexanet/MonologExtraBundle) 	[![Total Downloads](https://poser.pugx.org/hexanet/monolog-extra-bundle/downloads.png)](https://packagist.org/packages/hexanet/monolog-extra-bundle) [![Latest Unstable Version](https://poser.pugx.org/hexanet/monolog-extra-bundle/v/unstable.png)](https://packagist.org/packages/hexanet/monolog-extra-bundle)
+
+Symfony2 bundle with extra processors and logger to log request/response.
+
+## Installation
+
+```
+composer require hexanet/monolog-extra-bundle
+```
+
+## Configuration reference
 
 ```
 hexanet_monolog_extra:
@@ -50,10 +60,18 @@ hexanet_monolog_extra:
 ```
 
 
-## Apache Unique ID
+### Apache Unique ID
 
 This module add an unique id to each request.
 
 ```
 a2enmod unique_id
 ```
+
+## Credits
+
+Developed by the [Web Team](https://teamweb.hexanet.fr/) of [Hexanet](http://www.hexanet.fr/).
+
+## License
+
+[MonologExtraBundle](https://github.com/Hexanet/MonologExtraBundle) is licensed under the [MIT license](LICENSE).
