@@ -87,13 +87,6 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('add_uid_to_response')->defaultFalse()->end()
                     ->end()
                 ->end()
-                ->arrayNode('gelf')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('host')->defaultValue('localhost')->end()
-                        ->scalarNode('port')->defaultValue('12201')->end()
-                    ->end()
-                ->end()
             ->end();
 
         return $treeBuilder;

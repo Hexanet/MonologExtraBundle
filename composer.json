@@ -16,7 +16,6 @@
         }
     ],
     "require": {
-        "graylog2/gelf-php": "~1.0",
         "symfony/security": "~2.3|~3.0",
         "symfony/config": "~2.3|~3.0",
         "symfony/http-foundation": "~2.3|~3.0",
