@@ -40,8 +40,6 @@ class HexanetMonologExtraExtension extends Extension
 
     protected function addAdditions(ContainerBuilder $container, array $config)
     {
-        $config['processor']['additions']['type'] = "symfony";
-
         $definition = $container->getDefinition('hexanet_monolog_extra.logger.processor.additions');
 
         if ($config['processor']['environment']) {
