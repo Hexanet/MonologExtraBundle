@@ -25,9 +25,6 @@ class HexanetMonologExtraExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $container->setParameter('hexanet_monolog_extra.gelf.host', $config['gelf']['host']);
-        $container->setParameter('hexanet_monolog_extra.gelf.port', $config['gelf']['port']);
-
         $container->setParameter('hexanet_monolog_extra.session_start', $config['session_start']);
 
         $container->setAlias('hexanet_monolog_extra.logger.provider.uid', $config['provider']['uid']);

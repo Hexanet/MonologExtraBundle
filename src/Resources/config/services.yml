@@ -1,15 +1,4 @@
 services:
-    hexanet_monolog_extra.gelf.transport:
-        class: Gelf\Transport\UdpTransport
-        arguments:
-            - %hexanet_monolog_extra.gelf.host%
-            - %hexanet_monolog_extra.gelf.port%
-
-    hexanet_monolog_extra.gelf.publisher:
-        class: Hexanet\Common\MonologExtraBundle\Gelf\Publisher
-        arguments:
-            - "@hexanet_monolog_extra.gelf.transport"
-
     hexanet_monolog_extra.listener.console_exception:
         class: Hexanet\Common\MonologExtraBundle\EventListener\ConsoleExceptionListener
         arguments:

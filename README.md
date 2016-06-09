@@ -52,11 +52,6 @@ hexanet_monolog_extra:
         user: hexanet_monolog_extra.logger.provider.user.symfony
 
         session_id: hexanet_monolog_extra.logger.provider.session.symfony
-
-    #  the bundle come with a gelf publisher that handle communication error with the remote server
-    gelf:
-        host: '%graylog_host%'
-        port: '%graylog_port%'
 ```
 
 
