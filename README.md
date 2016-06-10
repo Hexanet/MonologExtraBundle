@@ -30,8 +30,9 @@ hexanet_monolog_extra:
         # add symfony environnement
         environment: true
 
-        # add static data ( by default it add type => symfony )
+        # add static data
         additions:
+            type: symfony
             application: symfony application
             extra_info: blabla
 
