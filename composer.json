@@ -1,7 +1,7 @@
 {
     "name": "hexanet/monolog-extra-bundle",
     "type": "symfony-bundle",
-    "description": "stuff related to log",
+    "description": "Symfony bundle with extra processors and logger to log request/response",
     "keywords": ["log", "logging"],
     "license": "MIT",
     "autoload": {
