@@ -52,25 +52,11 @@ class HexanetMonologExtraExtension extends Extension
     }
 
     protected function addProcessors(ContainerBuilder $container, array $config) {
-        if ($config['processor']['psr_log_message']) {
-            $definition = $container->getDefinition('hexanet_monolog_extra.logger.processor.psr_log_message');
-            $definition->addTag('monolog.processor');
-        } else {
-            $container->removeDefinition('hexanet_monolog_extra.logger.processor.psr_log_message');
-        }
-
         if ($config['processor']['user']) {
             $definition = $container->getDefinition('hexanet_monolog_extra.logger.processor.username');
             $definition->addTag('monolog.processor', ['method' => 'processRecord']);
         } else {
             $container->removeDefinition('hexanet_monolog_extra.logger.processor.username');
-        }
-
-        if ($config['processor']['process_id']) {
-            $definition = $container->getDefinition('hexanet_monolog_extra.logger.processor.process_id');
-            $definition->addTag('monolog.processor');
-        } else {
-            $container->removeDefinition('hexanet_monolog_extra.logger.processor.process_id');
         }
 
         if ($config['processor']['uid']) {
