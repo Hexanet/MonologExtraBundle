@@ -42,10 +42,6 @@ class HexanetMonologExtraExtension extends Extension
     {
         $definition = $container->getDefinition('hexanet_monolog_extra.logger.processor.additions');
 
-        if ($config['processor']['environment']) {
-            $config['additions']['environment'] = $container->getParameter('kernel.environment');
-        }
-
         $definition
             ->addTag('monolog.processor', ['method' => 'processRecord'])
             ->replaceArgument(0, $config['processor']['additions']);
