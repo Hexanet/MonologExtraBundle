@@ -45,12 +45,6 @@ services:
         arguments:
             - []
 
-    hexanet_monolog_extra.logger.processor.psr_log_message:
-        class: Monolog\Processor\PsrLogMessageProcessor
-
-    hexanet_monolog_extra.logger.processor.process_id:
-        class: Monolog\Processor\ProcessIdProcessor
-
     hexanet_monolog_extra.logger.processor.uid:
         class: Hexanet\Common\MonologExtraBundle\Processor\UidProcessor
         arguments:
