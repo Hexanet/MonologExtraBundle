@@ -127,7 +127,7 @@ X-UID: 57c5f5e842b10
 
 ## Credits
 
-Developed by the SI Team of [Hexanet](http://www.hexanet.fr/).
+Developed by the [Dev Team](http://teamdev.hexanet.fr) of [Hexanet](http://www.hexanet.fr/).
 
 ## License
 
