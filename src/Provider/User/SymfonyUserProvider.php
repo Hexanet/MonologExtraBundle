@@ -19,6 +19,9 @@ class SymfonyUserProvider implements UserProviderInterface
      */
     CONST USER_CLI = 'cli';
 
+    /**
+     * @var null|ContainerInterface|TokenStorageInterface
+     */
     private $tokenStorage;
 
     /**
