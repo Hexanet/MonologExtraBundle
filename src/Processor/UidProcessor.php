@@ -4,13 +4,10 @@ namespace Hexanet\Common\MonologExtraBundle\Processor;
 
 use Hexanet\Common\MonologExtraBundle\Provider\Uid\UidProviderInterface;
 
-/**
- * Add uid to records
- */
 class UidProcessor
 {
     /**
-     * @var \Hexanet\Common\LogBundle\Provider\Uid\UidProviderInterface
+     * @var UidProviderInterface
      */
     protected $uidProvider;
 

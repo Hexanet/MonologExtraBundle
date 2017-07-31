@@ -45,7 +45,7 @@ class ResponseLogger implements ResponseLoggerInterface
     public function getMemory()
     {
         $memory = memory_get_peak_usage(true);
-        $memory = ($memory > 1024 ? intval($memory / 1024) : 0);
+        $memory = $memory > 1024 ? (int) ($memory / 1024) : 0;
 
         return $memory;
     }
@@ -53,12 +53,12 @@ class ResponseLogger implements ResponseLoggerInterface
     /**
      * @param Request $request
      *
-     * @return float|mixed
+     * @return float|null
      */
     public function getTime(Request $request)
     {
         if (!$request->server) {
-            return;
+            return null;
         }
 
         $startTime = $request->server->get(
@@ -68,7 +68,7 @@ class ResponseLogger implements ResponseLoggerInterface
         $time = microtime(true) - $startTime;
         $time = round($time * 1000);
 
-        return $time;
+        return (float) $time;
     }
 
     /**
