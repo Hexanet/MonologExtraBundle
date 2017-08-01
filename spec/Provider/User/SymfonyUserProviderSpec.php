@@ -4,13 +4,13 @@ namespace spec\Hexanet\Common\MonologExtraBundle\Provider\User;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class SymfonyUserProviderSpec extends ObjectBehavior
 {
-    function let(ContainerInterface $container)
+    function let(TokenStorageInterface $tokenStorage)
     {
-        $this->beConstructedWith($container);
+        $this->beConstructedWith($tokenStorage);
     }
 
     function it_is_initializable()

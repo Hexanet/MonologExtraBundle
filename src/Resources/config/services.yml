@@ -29,6 +29,8 @@ services:
 
     hexanet_monolog_extra.logger.provider.user.symfony:
         class: Hexanet\Common\MonologExtraBundle\Provider\User\SymfonyUserProvider
+        arguments:
+            - "@?security.token_storage"
 
     hexanet_monolog_extra.logger.processor.username:
         class: Hexanet\Common\MonologExtraBundle\Processor\UserProcessor
