@@ -2,6 +2,8 @@
 
 namespace spec\Hexanet\Common\MonologExtraBundle\Logger\Response;
 
+use Hexanet\Common\MonologExtraBundle\Logger\Response\ResponseLogger;
+use Hexanet\Common\MonologExtraBundle\Logger\Response\ResponseLoggerInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
@@ -18,12 +20,12 @@ class ResponseLoggerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Hexanet\Common\MonologExtraBundle\Logger\Response\ResponseLogger');
+        $this->shouldHaveType(ResponseLogger::class);
     }
 
     function it_implements_response_logger_interface()
     {
-        $this->shouldImplement('Hexanet\Common\MonologExtraBundle\Logger\Response\ResponseLoggerInterface');
+        $this->shouldImplement(ResponseLoggerInterface::class);
     }
 
     function it_logs_request(LoggerInterface $logger, Response $response, Request $request, ParameterBag $parameterBag)

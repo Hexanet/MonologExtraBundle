@@ -26,7 +26,7 @@ class UidProcessor
      *
      * @return array
      */
-    public function processRecord(array $record)
+    public function processRecord(array $record) : array
     {
         $record['extra']['uid'] = $this->uidProvider->getUid();
 

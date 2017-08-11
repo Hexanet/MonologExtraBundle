@@ -33,7 +33,7 @@ class SymfonyUserProvider implements UserProviderInterface
     /**
      * @return string
      */
-    public function getUser()
+    public function getUser() : string
     {
         $user = self::USER_ANONYMOUS;
 

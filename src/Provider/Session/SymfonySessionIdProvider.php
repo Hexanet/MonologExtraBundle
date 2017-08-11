@@ -14,7 +14,7 @@ class SymfonySessionIdProvider implements SessionIdProviderInterface
     protected $startSession;
 
     /**
-     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
+     * @var SessionInterface
      */
     protected $session;
 
@@ -24,7 +24,7 @@ class SymfonySessionIdProvider implements SessionIdProviderInterface
      * @param bool             $startSession
      * @param SessionInterface $session
      */
-    public function __construct($startSession = false, SessionInterface $session)
+    public function __construct(bool $startSession = false, SessionInterface $session)
     {
         $this->startSession = $startSession;
         $this->session = $session;
@@ -33,7 +33,7 @@ class SymfonySessionIdProvider implements SessionIdProviderInterface
     /**
      * @return string
      */
-    public function getSessionId()
+    public function getSessionId() : string
     {
         try {
             if ($this->startSession && !$this->session->isStarted()) {

@@ -17,7 +17,7 @@ class UniqidProvider implements UidProviderInterface
     /**
      * @return string
      */
-    public function getUid()
+    public function getUid() : string
     {
         return $this->uid;
     }

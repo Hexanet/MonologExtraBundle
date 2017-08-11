@@ -2,6 +2,7 @@
 
 namespace spec\Hexanet\Common\MonologExtraBundle\Processor;
 
+use Hexanet\Common\MonologExtraBundle\Processor\UidProcessor;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Hexanet\Common\MonologExtraBundle\Provider\Uid\UidProviderInterface;
@@ -15,7 +16,7 @@ class UidProcessorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Hexanet\Common\MonologExtraBundle\Processor\UidProcessor');
+        $this->shouldHaveType(UidProcessor::class);
     }
 
     function it_adds_uniq_request_id_to_record(UidProviderInterface $uidProvider)

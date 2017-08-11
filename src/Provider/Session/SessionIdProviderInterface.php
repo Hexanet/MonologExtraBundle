@@ -7,5 +7,5 @@ interface SessionIdProviderInterface
     /**
      * @return string
      */
-    public function getSessionId();
+    public function getSessionId() : string;
 }
