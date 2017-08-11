@@ -27,7 +27,7 @@ class ResponseLogger implements ResponseLoggerInterface
      * @param Response $response
      * @param Request  $request
      */
-    public function logResponse(Response $response, Request $request)
+    public function logResponse(Response $response, Request $request) : void
     {
         $msg = sprintf(
             'Response %s for "%s %s"',
@@ -42,7 +42,7 @@ class ResponseLogger implements ResponseLoggerInterface
     /**
      * @return int
      */
-    public function getMemory()
+    public function getMemory() : int
     {
         $memory = memory_get_peak_usage(true);
         $memory = $memory > 1024 ? (int) ($memory / 1024) : 0;
@@ -55,7 +55,7 @@ class ResponseLogger implements ResponseLoggerInterface
      *
      * @return float|null
      */
-    public function getTime(Request $request)
+    public function getTime(Request $request) : ?float
     {
         if (!$request->server) {
             return null;
@@ -77,7 +77,7 @@ class ResponseLogger implements ResponseLoggerInterface
      *
      * @return array
      */
-    protected function createContext(Response $response, Request $request)
+    protected function createContext(Response $response, Request $request) : array
     {
         $context =  array(
             'response_status_code' => $response->getStatusCode(),

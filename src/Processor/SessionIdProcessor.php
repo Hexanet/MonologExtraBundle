@@ -27,7 +27,7 @@ class SessionIdProcessor
      *
      * @return array
      */
-    public function processRecord(array $record)
+    public function processRecord(array $record) : array
     {
         $record['extra']['session_id'] = $this->sessionIdProvider->getSessionId();
 

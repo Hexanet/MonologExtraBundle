@@ -26,7 +26,7 @@ class UidResponseListener
     /**
      * @param FilterResponseEvent $event
      */
-    public function onKernelResponse(FilterResponseEvent $event)
+    public function onKernelResponse(FilterResponseEvent $event) : void
     {
         $event->getResponse()->headers->set('X-UID', $this->uidProvider->getUid());
     }

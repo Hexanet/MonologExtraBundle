@@ -5,7 +5,7 @@ namespace Hexanet\Common\MonologExtraBundle\Provider\Uid;
 interface UidProviderInterface
 {
     /**
-     * @return mixed
+     * @return string
      */
-    public function getUid();
+    public function getUid() : string;
 }

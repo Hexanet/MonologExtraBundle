@@ -2,6 +2,7 @@
 
 namespace spec\Hexanet\Common\MonologExtraBundle\Provider\Session;
 
+use Hexanet\Common\MonologExtraBundle\Provider\Session\SessionIdProviderInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -16,12 +17,12 @@ class SymfonySessionIdProviderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Hexanet\Common\MonologExtraBundle\Provider\Session\SymfonySessionIdProvider');
+        $this->shouldHaveType(SymfonySessionIdProvider::class);
     }
 
     function it_implements_session_id_provider_interface()
     {
-        $this->shouldImplement('Hexanet\Common\MonologExtraBundle\Provider\Session\SessionIdProviderInterface');
+        $this->shouldImplement(SessionIdProviderInterface::class);
     }
 
     function it_starts_session(SessionInterface $session)
@@ -51,7 +52,7 @@ class SymfonySessionIdProviderSpec extends ObjectBehavior
     {
         $session
             ->start()
-            ->willThrow("\RuntimeException");
+            ->willThrow(\RuntimeException::class);
 
         $this->getSessionId()->shouldReturn(SymfonySessionIdProvider::SESSION_ID_UNKNOWN);
     }

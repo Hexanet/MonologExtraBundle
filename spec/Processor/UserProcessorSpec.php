@@ -2,6 +2,7 @@
 
 namespace spec\Hexanet\Common\MonologExtraBundle\Processor;
 
+use Hexanet\Common\MonologExtraBundle\Processor\UserProcessor;
 use Hexanet\Common\MonologExtraBundle\Provider\User\UserProviderInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -15,7 +16,7 @@ class UserProcessorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Hexanet\Common\MonologExtraBundle\Processor\UserProcessor');
+        $this->shouldHaveType(UserProcessor::class);
     }
 
     function it_adds_user_to_record(UserProviderInterface $userProvider)

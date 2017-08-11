@@ -25,7 +25,7 @@ class RequestLogger implements RequestLoggerInterface
     /**
      * @param Request $request
      */
-    public function logRequest(Request $request)
+    public function logRequest(Request $request) : void
     {
         $msg = sprintf(
             'Request "%s %s"',
@@ -36,7 +36,12 @@ class RequestLogger implements RequestLoggerInterface
         $this->logger->info($msg, $this->createContexts($request));
     }
 
-    public function createContexts(Request $request)
+    /**
+     * @param Request $request
+     *
+     * @return array
+     */
+    public function createContexts(Request $request) : array
     {
         $map = array(
             'request_method' => $request->getMethod(),
@@ -54,16 +59,9 @@ class RequestLogger implements RequestLoggerInterface
             'request_locale' => $request->getLocale(),
             'request_auth_user' => $request->getUser(),
             'request_auth_has_password' => !is_null($request->getPassword()),
+            'request_encodings' => $request->getEncodings(),
+            'request_client_ips' => $request->getClientIps(),
         );
-
-        // Attributes from newer versions.
-        if(method_exists($request, 'getEncodings')) {
-            $map['request_encodings'] = $request->getEncodings();
-        }
-
-        if(method_exists($request, 'getClientIps')) {
-            $map['request_client_ips'] = $request->getClientIps();
-        }
 
         return $map;
     }

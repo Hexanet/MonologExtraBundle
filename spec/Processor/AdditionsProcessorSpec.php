@@ -2,6 +2,7 @@
 
 namespace spec\Hexanet\Common\MonologExtraBundle\Processor;
 
+use Hexanet\Common\MonologExtraBundle\Processor\AdditionsProcessor;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -14,7 +15,7 @@ class AdditionsProcessorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Hexanet\Common\MonologExtraBundle\Processor\AdditionsProcessor');
+        $this->shouldHaveType(AdditionsProcessor::class);
     }
 
     function it_adds_nothing_to_record_by_default()

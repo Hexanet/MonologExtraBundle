@@ -7,5 +7,5 @@ interface UserProviderInterface
     /**
      * @return string;
      */
-    public function getUser();
+    public function getUser() : string;
 }

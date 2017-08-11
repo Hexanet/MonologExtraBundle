@@ -9,6 +9,9 @@ class ApacheUniqueIdProvider implements UidProviderInterface
      */
     protected $uid;
 
+    /**
+     * @param array|null $serverData
+     */
     public function __construct(array $serverData = null)
     {
         $uid = uniqid();
@@ -20,13 +23,14 @@ class ApacheUniqueIdProvider implements UidProviderInterface
         if (isset($serverData['UNIQUE_ID'])) {
             $uid = $serverData['UNIQUE_ID'];
         }
+
         $this->uid = $uid;
     }
 
     /**
      * @return string
      */
-    public function getUid()
+    public function getUid() : string
     {
         return $this->uid;
     }

@@ -2,6 +2,7 @@
 
 namespace spec\Hexanet\Common\MonologExtraBundle\Processor;
 
+use Hexanet\Common\MonologExtraBundle\Processor\SessionIdProcessor;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Hexanet\Common\MonologExtraBundle\Provider\Session\SessionIdProviderInterface;
@@ -15,7 +16,7 @@ class SessionIdProcessorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Hexanet\Common\MonologExtraBundle\Processor\SessionIdProcessor');
+        $this->shouldHaveType(SessionIdProcessor::class);
     }
 
     function it_adds_session_id_to_record(SessionIdProviderInterface $sessionIdProvider)
