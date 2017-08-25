@@ -9,25 +9,23 @@ class SymfonySessionIdProvider implements SessionIdProviderInterface
     const SESSION_ID_UNKNOWN = 'unknown';
 
     /**
-     * @var bool
-     */
-    protected $startSession;
-
-    /**
      * @var SessionInterface
      */
     protected $session;
 
     /**
-     * Construct
-     *
-     * @param bool             $startSession
-     * @param SessionInterface $session
+     * @var bool
      */
-    public function __construct(bool $startSession = false, SessionInterface $session)
+    protected $startSession;
+
+    /**
+     * @param SessionInterface $session
+     * @param bool             $startSession
+     */
+    public function __construct(SessionInterface $session, bool $startSession = false)
     {
-        $this->startSession = $startSession;
         $this->session = $session;
+        $this->startSession = $startSession;
     }
 
     /**

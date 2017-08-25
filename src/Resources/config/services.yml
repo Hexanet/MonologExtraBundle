@@ -24,8 +24,8 @@ services:
     hexanet_monolog_extra.logger.provider.session.symfony:
         class: Hexanet\Common\MonologExtraBundle\Provider\Session\SymfonySessionIdProvider
         arguments:
-          - "%hexanet_monolog_extra.session_start%"
           - "@?session"
+          - "%hexanet_monolog_extra.session_start%"
 
     hexanet_monolog_extra.logger.provider.user.symfony:
         class: Hexanet\Common\MonologExtraBundle\Provider\User\SymfonyUserProvider

@@ -12,7 +12,7 @@ class SymfonySessionIdProviderSpec extends ObjectBehavior
 {
     function let(SessionInterface $session)
     {
-        $this->beConstructedWith(true, $session);
+        $this->beConstructedWith($session, true);
     }
 
     function it_is_initializable()
