@@ -1,6 +1,6 @@
 # MonologExtraBundle
 
-[![Build Status](https://api.travis-ci.org/Hexanet/MonologExtraBundle.svg)](http://travis-ci.org/Hexanet/MonologExtraBundle) 	[![Total Downloads](https://poser.pugx.org/hexanet/monolog-extra-bundle/downloads.png)](https://packagist.org/packages/hexanet/monolog-extra-bundle) [![Latest Unstable Version](https://poser.pugx.org/hexanet/monolog-extra-bundle/v/unstable.png)](https://packagist.org/packages/hexanet/monolog-extra-bundle)
+[![Build Status](https://api.travis-ci.org/Hexanet/MonologExtraBundle.svg)](http://travis-ci.org/Hexanet/MonologExtraBundle) 	[![Total Downloads](https://poser.pugx.org/hexanet/monolog-extra-bundle/downloads.png)](https://packagist.org/packages/hexanet/monolog-extra-bundle) [![Latest stable Version](https://poser.pugx.org/hexanet/monolog-extra-bundle/v/stable.png)](https://packagist.org/packages/hexanet/monolog-extra-bundle)
 
 Symfony bundle with extra processors and logger to log request/response.
 
