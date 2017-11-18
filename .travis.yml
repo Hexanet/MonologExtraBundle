@@ -5,9 +5,11 @@ sudo: false
 matrix:
   include:
     - php: 7.1
-      env: SYMFONY_VERSION=3.3.*
+      env: SYMFONY_VERSION=^3.0
+    - php: 7.1
+      env: DEPENDENCIES=beta
     - php: 7.2
-      env: SYMFONY_VERSION=3.3.*
+      env: SYMFONY_VERSION=^3.0
 
 env:
   global:
@@ -19,10 +21,10 @@ cache:
 
 before_install:
   - composer self-update
+  - if [ "$DEPENDENCIES" = "beta" ]; then composer config minimum-stability beta; fi;
   - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/security:$SYMFONY_VERSION symfony/config:$SYMFONY_VERSION symfony/http-foundation:$SYMFONY_VERSION symfony/dependency-injection:$SYMFONY_VERSION symfony/http-kernel:$SYMFONY_VERSION; fi
 
-install:
-  - composer install
+install: composer update --prefer-dist --no-interaction $COMPOSER_FLAGS
 
 script:
   - bin/phpspec run -fpretty --verbose
