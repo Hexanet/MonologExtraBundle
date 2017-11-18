@@ -71,6 +71,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('on_request')->defaultFalse()->end()
                         ->scalarNode('on_response')->defaultFalse()->end()
+                        ->scalarNode('on_command')->defaultFalse()->end()
                         ->scalarNode('on_console_exception')->defaultTrue()->end()
                         ->scalarNode('add_uid_to_response')->defaultFalse()->end()
                     ->end()
