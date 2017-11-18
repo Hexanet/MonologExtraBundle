@@ -28,13 +28,14 @@ class ResponseLoggerSpec extends ObjectBehavior
         $this->shouldImplement(ResponseLoggerInterface::class);
     }
 
-    function it_logs_request(LoggerInterface $logger, Response $response, Request $request, ParameterBag $parameterBag)
+    function it_logs_request(LoggerInterface $logger)
     {
         $logger
             ->info(Argument::type('string'), Argument::type('array'))
             ->shouldBeCalled();
 
-        $request->attributes = $parameterBag;
+        $request = new Request();
+        $response = new Response();
 
         $this->logResponse($response, $request);
     }
