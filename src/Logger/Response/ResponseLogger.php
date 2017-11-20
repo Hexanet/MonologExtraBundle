@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 class ResponseLogger implements ResponseLoggerInterface
 {
     /**
-     * LoggerInterface
+     * @var LoggerInterface
      */
     protected $logger;
 

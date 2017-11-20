@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 class RequestLogger implements RequestLoggerInterface
 {
     /**
-     * LoggerInterface
+     * @var LoggerInterface
      */
     protected $logger;
 
