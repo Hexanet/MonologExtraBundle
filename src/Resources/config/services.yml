@@ -10,6 +10,11 @@ services:
             - "@hexanet_monolog_extra.logger.request"
             - "@hexanet_monolog_extra.logger.response"
 
+    hexanet_monolog_extra.listener.command:
+        class: Hexanet\Common\MonologExtraBundle\EventListener\CommandListener
+        arguments:
+            - "@hexanet_monolog_extra.logger.command"
+
     hexanet_monolog_extra.listener.uid_to_response:
         class: Hexanet\Common\MonologExtraBundle\EventListener\UidResponseListener
         arguments:
@@ -59,5 +64,10 @@ services:
 
     hexanet_monolog_extra.logger.response:
         class: Hexanet\Common\MonologExtraBundle\Logger\Response\ResponseLogger
+        arguments:
+            - "@logger"
+
+    hexanet_monolog_extra.logger.command:
+        class: Hexanet\Common\MonologExtraBundle\Logger\Command\CommandLogger
         arguments:
             - "@logger"

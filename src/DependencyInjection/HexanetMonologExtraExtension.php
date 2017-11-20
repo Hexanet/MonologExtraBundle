@@ -35,6 +35,7 @@ class HexanetMonologExtraExtension extends Extension
         $this->addProcessors($container, $config);
         $this->addConsoleExceptionListener($container, $config);
         $this->addRequestResponseListener($container, $config);
+        $this->addCommandListener($container, $config);
         $this->addUidToResponseListener($container, $config);
     }
 
@@ -99,6 +100,18 @@ class HexanetMonologExtraExtension extends Extension
         if ($config['logger']['on_response']) {
             $definition->addTag('kernel.event_listener', ['event' => 'kernel.response', 'method' => 'onResponse']);
         }
+    }
+
+    protected function addCommandListener(ContainerBuilder $container, array $config)
+    {
+        if (!$config['logger']['on_command']) {
+            $container->removeDefinition('hexanet_monolog_extra.listener.command');
+
+            return;
+        }
+
+        $definition = $container->getDefinition('hexanet_monolog_extra.listener.command');
+        $definition->addTag('kernel.event_listener', ['event' => 'console.command', 'method' => 'onCommandResponse']);
     }
 
     protected function addUidToResponseListener(ContainerBuilder $container, array $config)

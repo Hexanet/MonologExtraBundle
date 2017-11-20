@@ -29,6 +29,9 @@ hexanet_monolog_extra:
         # log each response
         on_response: true
 
+        # log each command
+        on_command: true
+
         # log console exception
         on_console_exception: true
 
