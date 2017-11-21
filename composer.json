@@ -29,6 +29,7 @@
         "phpstan/phpstan": "^0.8.0"
     },
     "suggest": {
+        "symfony/security": "^3.0 || ^4.0"
     },
     "config": {
         "bin-dir": "bin"
