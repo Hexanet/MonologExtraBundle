@@ -91,11 +91,12 @@ Add custom data in each log entry.
 
 ```yaml
 hexanet_monolog_extra:
-  additions:
-      type: symfony
-      application: the best symfony application
-      locale: "%locale%"
-      environment: "%kernel.environment%"
+    processor:
+        additions:
+            type: symfony
+            application: the best symfony application
+            locale: "%locale%"
+            environment: "%kernel.environment%"
 ```
 
 ### Loggers
