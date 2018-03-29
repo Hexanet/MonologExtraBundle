@@ -2,16 +2,12 @@
 
 namespace Hexanet\Common\MonologExtraBundle\DependencyInjection;
 
+use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
-/**
- * This is the class that loads and manages your bundle configuration
- *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
- */
 class HexanetMonologExtraExtension extends Extension
 {
     /**
@@ -79,8 +75,10 @@ class HexanetMonologExtraExtension extends Extension
             return;
         }
 
+        $event = class_exists('Symfony\Component\Console\Event\ConsoleErrorEvent') ? ConsoleEvents::ERROR : ConsoleEvents::EXCEPTION;
+
         $definition = $container->getDefinition('hexanet_monolog_extra.listener.console_exception');
-        $definition->addTag('kernel.event_listener', ['event' => 'console.exception', 'method' => 'onConsoleException']);
+        $definition->addTag('kernel.event_listener', ['event' => $event, 'method' => 'onConsoleException']);
     }
 
     protected function addRequestResponseListener(ContainerBuilder $container, array $config)
