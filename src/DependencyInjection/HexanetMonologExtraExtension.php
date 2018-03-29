@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\HttpKernel\KernelEvents;
 
 class HexanetMonologExtraExtension extends Extension
 {
@@ -92,11 +93,11 @@ class HexanetMonologExtraExtension extends Extension
         $definition = $container->getDefinition('hexanet_monolog_extra.listener.request_response');
 
         if ($config['logger']['on_request']) {
-            $definition->addTag('kernel.event_listener', ['event' => 'kernel.request', 'method' => 'onRequest']);
+            $definition->addTag('kernel.event_listener', ['event' => KernelEvents::REQUEST, 'method' => 'onRequest']);
         }
 
         if ($config['logger']['on_response']) {
-            $definition->addTag('kernel.event_listener', ['event' => 'kernel.response', 'method' => 'onResponse']);
+            $definition->addTag('kernel.event_listener', ['event' => KernelEvents::RESPONSE, 'method' => 'onResponse']);
         }
     }
 
@@ -109,7 +110,7 @@ class HexanetMonologExtraExtension extends Extension
         }
 
         $definition = $container->getDefinition('hexanet_monolog_extra.listener.command');
-        $definition->addTag('kernel.event_listener', ['event' => 'console.command', 'method' => 'onCommandResponse']);
+        $definition->addTag('kernel.event_listener', ['event' => ConsoleEvents::COMMAND, 'method' => 'onCommandResponse']);
     }
 
     protected function addUidToResponseListener(ContainerBuilder $container, array $config)
@@ -121,6 +122,6 @@ class HexanetMonologExtraExtension extends Extension
         }
 
         $definition = $container->getDefinition('hexanet_monolog_extra.listener.uid_to_response');
-        $definition->addTag('kernel.event_listener', ['event' => 'kernel.response', 'method' => 'onKernelResponse']);
+        $definition->addTag('kernel.event_listener', ['event' => KernelEvents::RESPONSE, 'method' => 'onKernelResponse']);
     }
 }
