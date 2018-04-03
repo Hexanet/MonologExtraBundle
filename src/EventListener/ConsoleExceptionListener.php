@@ -31,6 +31,10 @@ class ConsoleExceptionListener
         }
 
         $command = $event->getCommand();
+        if (!$command) {
+            return;
+        }
+
         $exception = $event instanceof ConsoleErrorEvent ? $event->getError() : $event->getException();
 
         $message = sprintf(
