@@ -27,9 +27,6 @@
     "require-dev": {
         "phpspec/phpspec": "^4.3"
     },
-    "suggest": {
-        "symfony/security": "^3.4 || ^4.0"
-    },
     "config": {
         "bin-dir": "bin",
         "sort-packages": true
