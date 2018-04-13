@@ -2,6 +2,17 @@
 
 namespace Hexanet\Common\MonologExtraBundle\DependencyInjection;
 
+use Hexanet\Common\MonologExtraBundle\EventListener\CommandListener;
+use Hexanet\Common\MonologExtraBundle\EventListener\ConsoleExceptionListener;
+use Hexanet\Common\MonologExtraBundle\EventListener\RequestResponseListener;
+use Hexanet\Common\MonologExtraBundle\EventListener\UidResponseListener;
+use Hexanet\Common\MonologExtraBundle\Processor\AdditionsProcessor;
+use Hexanet\Common\MonologExtraBundle\Processor\SessionIdProcessor;
+use Hexanet\Common\MonologExtraBundle\Processor\UidProcessor;
+use Hexanet\Common\MonologExtraBundle\Processor\UserProcessor;
+use Hexanet\Common\MonologExtraBundle\Provider\Session\SessionIdProviderInterface;
+use Hexanet\Common\MonologExtraBundle\Provider\Uid\UidProviderInterface;
+use Hexanet\Common\MonologExtraBundle\Provider\User\UserProviderInterface;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -24,9 +35,9 @@ class HexanetMonologExtraExtension extends Extension
 
         $container->setParameter('hexanet_monolog_extra.session_start', $config['session_start']);
 
-        $container->setAlias('hexanet_monolog_extra.logger.provider.uid', $config['provider']['uid']);
-        $container->setAlias('hexanet_monolog_extra.logger.provider.session', $config['provider']['session_id']);
-        $container->setAlias('hexanet_monolog_extra.logger.provider.user', $config['provider']['user']);
+        $container->setAlias(UidProviderInterface::class, $config['provider']['uid']);
+        $container->setAlias(SessionIdProviderInterface::class, $config['provider']['session_id']);
+        $container->setAlias(UserProviderInterface::class, $config['provider']['user']);
 
         $this->addAdditions($container, $config);
         $this->addProcessors($container, $config);
@@ -38,59 +49,57 @@ class HexanetMonologExtraExtension extends Extension
 
     protected function addAdditions(ContainerBuilder $container, array $config)
     {
-        $definition = $container->getDefinition('hexanet_monolog_extra.logger.processor.additions');
+        $definition = $container->getDefinition(AdditionsProcessor::class);
 
         $definition
             ->addTag('monolog.processor', ['method' => 'processRecord'])
-            ->replaceArgument(0, $config['processor']['additions']);
+            ->addArgument($config['processor']['additions']);
     }
 
     protected function addProcessors(ContainerBuilder $container, array $config) {
         if ($config['processor']['user']) {
-            $definition = $container->getDefinition('hexanet_monolog_extra.logger.processor.username');
+            $definition = $container->getDefinition(UserProcessor::class);
             $definition->addTag('monolog.processor', ['method' => 'processRecord']);
         } else {
-            $container->removeDefinition('hexanet_monolog_extra.logger.processor.username');
+            $container->removeDefinition(UserProcessor::class);
         }
 
         if ($config['processor']['uid']) {
-            $definition = $container->getDefinition('hexanet_monolog_extra.logger.processor.uid');
+            $definition = $container->getDefinition(UidProcessor::class);
             $definition->addTag('monolog.processor', ['method' => 'processRecord']);
         } else {
-            $container->removeDefinition('hexanet_monolog_extra.logger.processor.uid');
+            $container->removeDefinition(UidProcessor::class);
         }
 
         if ($config['processor']['session_id']) {
-            $definition = $container->getDefinition('hexanet_monolog_extra.logger.processor.session_id');
+            $definition = $container->getDefinition(SessionIdProcessor::class);
             $definition->addTag('monolog.processor', ['method' => 'processRecord']);
         } else {
-            $container->removeDefinition('hexanet_monolog_extra.logger.processor.session_id');
+            $container->removeDefinition(SessionIdProcessor::class);
         }
     }
 
     protected function addConsoleExceptionListener(ContainerBuilder $container, array $config)
     {
         if (!$config['logger']['on_console_exception']) {
-            $container->removeDefinition('hexanet_monolog_extra.listener.console_exception');
+            $container->removeDefinition(ConsoleExceptionListener::class);
 
             return;
         }
 
-        $event = class_exists('Symfony\Component\Console\Event\ConsoleErrorEvent') ? ConsoleEvents::ERROR : ConsoleEvents::EXCEPTION;
-
-        $definition = $container->getDefinition('hexanet_monolog_extra.listener.console_exception');
-        $definition->addTag('kernel.event_listener', ['event' => $event, 'method' => 'onConsoleException']);
+        $definition = $container->getDefinition(ConsoleExceptionListener::class);
+        $definition->addTag('kernel.event_listener', ['event' => ConsoleEvents::ERROR, 'method' => 'onConsoleException']);
     }
 
     protected function addRequestResponseListener(ContainerBuilder $container, array $config)
     {
         if (!$config['logger']['on_request'] && !$config['logger']['on_response']) {
-            $container->removeDefinition('hexanet_monolog_extra.listener.request_response');
+            $container->removeDefinition(RequestResponseListener::class);
 
             return;
         }
 
-        $definition = $container->getDefinition('hexanet_monolog_extra.listener.request_response');
+        $definition = $container->getDefinition(RequestResponseListener::class);
 
         if ($config['logger']['on_request']) {
             $definition->addTag('kernel.event_listener', ['event' => KernelEvents::REQUEST, 'method' => 'onRequest']);
@@ -104,24 +113,24 @@ class HexanetMonologExtraExtension extends Extension
     protected function addCommandListener(ContainerBuilder $container, array $config)
     {
         if (!$config['logger']['on_command']) {
-            $container->removeDefinition('hexanet_monolog_extra.listener.command');
+            $container->removeDefinition(CommandListener::class);
 
             return;
         }
 
-        $definition = $container->getDefinition('hexanet_monolog_extra.listener.command');
+        $definition = $container->getDefinition(CommandListener::class);
         $definition->addTag('kernel.event_listener', ['event' => ConsoleEvents::COMMAND, 'method' => 'onCommandResponse']);
     }
 
     protected function addUidToResponseListener(ContainerBuilder $container, array $config)
     {
         if (!$config['logger']['add_uid_to_response']) {
-            $container->removeDefinition('hexanet_monolog_extra.listener.uid_to_response');
+            $container->removeDefinition(UidResponseListener::class);
 
             return;
         }
 
-        $definition = $container->getDefinition('hexanet_monolog_extra.listener.uid_to_response');
+        $definition = $container->getDefinition(UidResponseListener::class);
         $definition->addTag('kernel.event_listener', ['event' => KernelEvents::RESPONSE, 'method' => 'onKernelResponse']);
     }
 }

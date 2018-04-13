@@ -26,10 +26,6 @@ class ConsoleExceptionListener
      */
     public function onConsoleException(ConsoleErrorEvent $event) : void
     {
-        if (!$event instanceof ConsoleExceptionEvent && !$event instanceof ConsoleErrorEvent) {
-            throw new \InvalidArgumentException('Event must be an instance of ConsoleExceptionEvent or ConsoleErrorEvent');
-        }
-
         $command = $event->getCommand();
         if (!$command) {
             return;

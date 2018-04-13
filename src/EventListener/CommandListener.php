@@ -5,9 +5,6 @@ namespace Hexanet\Common\MonologExtraBundle\EventListener;
 use Hexanet\Common\MonologExtraBundle\Logger\Command\CommandLoggerInterface;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
 
-/**
- * CommandListener
- */
 class CommandListener
 {
     /**

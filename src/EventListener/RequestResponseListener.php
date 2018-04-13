@@ -8,9 +8,6 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-/**
- * RequestListener
- */
 class RequestResponseListener
 {
     /**
