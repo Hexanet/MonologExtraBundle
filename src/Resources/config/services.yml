@@ -5,6 +5,7 @@ services:
         autoconfigure: true
         bind:
             $startSession: "%hexanet_monolog_extra.session_start%"
+            $session: '@?session'
 
     Hexanet\Common\MonologExtraBundle\:
         resource: '../../{Logger,EventListener,Processor,Provider}'
