@@ -40,9 +40,9 @@ hexanet_monolog_extra:
 
     # you can change the provider for uid, user and session_id
     provider:
-        uid: hexanet_monolog_extra.logger.provider.uid.apache_unique_id
+        uid: Hexanet\Common\MonologExtraBundle\Provider\Uid\ApacheUniqueIdProvider
 
-        user: hexanet_monolog_extra.logger.provider.user.symfony
+        user: Hexanet\Common\MonologExtraBundle\Provider\User\SymfonyUserProvider
 
-        session_id: hexanet_monolog_extra.logger.provider.session.symfony
+        session_id: Hexanet\Common\MonologExtraBundle\Provider\Session\SymfonySessionIdProvider
 ```

@@ -2,6 +2,9 @@
 
 namespace Hexanet\Common\MonologExtraBundle\DependencyInjection;
 
+use Hexanet\Common\MonologExtraBundle\Provider\Session\SymfonySessionIdProvider;
+use Hexanet\Common\MonologExtraBundle\Provider\Uid\UniqidProvider;
+use Hexanet\Common\MonologExtraBundle\Provider\User\SymfonyUserProvider;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -49,15 +52,15 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('session_id')
                             ->info("Provider for session id")
-                            ->defaultValue('hexanet_monolog_extra.logger.provider.session.symfony')
+                            ->defaultValue(SymfonySessionIdProvider::class)
                         ->end()
                         ->scalarNode('uid')
                             ->info("Provider for uid")
-                            ->defaultValue('hexanet_monolog_extra.logger.provider.uid.uniq')
+                            ->defaultValue(UniqidProvider::class)
                         ->end()
                         ->scalarNode('user')
                             ->info("Provider for user")
-                            ->defaultValue('hexanet_monolog_extra.logger.provider.user.symfony')
+                            ->defaultValue(SymfonyUserProvider::class)
                         ->end()
                     ->end()
                 ->end()

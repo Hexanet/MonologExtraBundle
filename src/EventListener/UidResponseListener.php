@@ -5,9 +5,6 @@ namespace Hexanet\Common\MonologExtraBundle\EventListener;
 use Hexanet\Common\MonologExtraBundle\Provider\Uid\UidProviderInterface;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-/**
- * RequestListener
- */
 class UidResponseListener
 {
     /**
