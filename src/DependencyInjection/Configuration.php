@@ -39,6 +39,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('additions')
                             ->info('A list of "key: value" entries that will be set in the [extra] section of each log message (Overwrites existing keys!).')
                             ->useAttributeAsKey('key')
+                            ->normalizeKeys(false)
                             ->prototype('scalar')
                                 ->info('Value for the key.')
                                 ->isRequired()
